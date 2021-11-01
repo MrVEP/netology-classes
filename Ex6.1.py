@@ -28,6 +28,13 @@ class Student:
         else:
             return 'Ошибка'
 
+    def __lt__(self, other):
+        if not isinstance(other, Student):
+            print(f"Ошибка {other.name} {other.surname} - не студент!")
+            return
+        else:
+            return self.avg_grades < other.avg_grades
+
     def __str__(self):
         if self.avg_grades == -1:
             txt_avg = 'Оценок за домашние задания не имеет.'
@@ -64,6 +71,13 @@ class Lecturer(Mentor):
             return f'Имя: {self.name} \nФамилия: {self.surname} \nОценок за лекции не имеет.'
         else:
             return f'Имя: {self.name} \nФамилия: {self.surname} \nСредняя оценка за лекции: {self.avg_grades}'
+
+    def __lt__(self, other):
+        if not isinstance(other, Lecturer):
+            print(f"Ошибка {other.name} {other.surname} - не лектор!")
+            return
+        else:
+            return self.avg_grades < other.avg_grades
 
 
 class Reviewer(Mentor):
@@ -172,4 +186,7 @@ print(GilyazovI, '\n')
 print(VoronovP, '\n')
 print(BatitskayaA, '\n')
 print(avg_students([IvanovI, PogreevV], 'Git'), '\n')
-print(avg_lecturers([BulyginO, GilyazovI], 'Python'))
+print(avg_lecturers([BulyginO, GilyazovI], 'Python'), '\n')
+print(PogreevV < IvanovI, '\n')
+print(PogreevV < BulyginO, '\n')
+print(BulyginO < GilyazovI, '\n')
